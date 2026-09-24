@@ -1,20 +1,31 @@
-require('dotenv').config();
-const express = require('express');
-const cors = require('cors');
-const connectDB = require('./config/db');
-const authRoutes = require('./routes/authRoutes');
+
+require("dotenv").config();
+
+const express = require("express");
+const cors = require("cors");
+const connectDB = require("./config/db");
+const authRoutes = require("./routes/authRoutes");
 
 const app = express();
 
-// middleware
+// Middleware
 app.use(cors());
-app.use(express.json()); // lets Express read JSON request bodies
+app.use(express.json());
 
-// connect to MongoDB
-connectDB();
+// Connect to MongoDB
+connectDB()
 
-// routes
-app.use('/api/auth', authRoutes);
+// Health check
+app.get("/", (req, res) => {
+  res.json({
+    message: "Registration API is running",
+    status: "success",
+  });
+});
 
-const PORT = process.env.PORT || 5000;
-app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+// Routes
+app.use("/api/auth", authRoutes);
+
+// Export app for Vercel
+module.exports = app;
+
