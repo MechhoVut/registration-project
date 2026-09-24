@@ -38,7 +38,7 @@ function RegistrationForm() {
 
     setLoading(true);
     try {
-      const res = await axios.post('http://localhost:5000/api/auth/register', formData);
+      const res = await axios.post('https://registration-project-tau.vercel.app/api/auth/register', formData);
       setSuccessMsg(res.data.message || 'Registered successfully!');
       setFormData({ name: '', email: '', password: '' });
       setErrors({});

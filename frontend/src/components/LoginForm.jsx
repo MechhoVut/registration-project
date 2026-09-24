@@ -38,7 +38,7 @@ function LoginForm() {
 
     setLoading(true);
     try {
-      const res = await axios.post('http://localhost:5000/api/auth/login', formData);
+      const res = await axios.post('https://registration-project-tau.vercel.app/api/auth/login', formData);
       localStorage.setItem('token', res.data.token);
       setSuccessMsg(res.data.message || 'Logged in successfully!');
       setFormData({ email: '', password: '' });
