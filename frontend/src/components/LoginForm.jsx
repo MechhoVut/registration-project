@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import axios from 'axios';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import AuthLayout from './AuthLayout';
 import {
   formVariants,
@@ -11,6 +11,7 @@ import {
 } from '../animations/formAnimations';
 
 function LoginForm() {
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({ email: '', password: '' });
   const [errors, setErrors] = useState({});
   const [successMsg, setSuccessMsg] = useState('');
@@ -42,6 +43,8 @@ function LoginForm() {
       setSuccessMsg(res.data.message || 'Logged in successfully!');
       setFormData({ email: '', password: '' });
       setErrors({});
+
+      setTimeout(() => navigate('/home'), 800);
     } catch (err) {
       setServerError(err.response?.data?.message || 'Something went wrong. Try again.');
     } finally {
